@@ -1,12 +1,92 @@
+
 <!DOCTYPE html>
 <html lang="en">
 <head>
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Document</title>
-</head>
-<body>
+
+    <!-- Bootstrap CSS -->
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css">
+    <!-- css link -->
+    <link rel="stylesheet" href="./Assets/style.css">
     
+    <title>Weather Information</title>
+</head>
+
+<body>
+    <!-- links below -->
+    <!-- jquery-->
+    <script src="https://code.jquery.com/jquery-3.4.1.min.js"></script>
+    <!-- bootstrap cdn -->
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"></script>
+    <!-- fontawesome -->
+    <script src="https://kit.fontawesome.com/d3bce829f3.js"></script>
+
+
+    <!--actual html-->
+    <!-- https://getbootstrap.com/docs/5.0/layout/containers/#fluid-containers -->
+    <div class="container-fluid">
+        <!-- https://getbootstrap.com/docs/4.0/components/card/ -->
+        <div class="card">
+            <div class="card-body text-center bg-primary text-white">
+                <h1>Weather Dashboard</h1>
+            </div>
+        </div>
+
+        <!-- container for search area and list -->
+        <div class="container">
+            <div class="row">
+                <div class="col">
+                      <!-- https://getbootstrap.com/docs/4.0/components/card/#example -->
+                    <div class="card-body">
+                        <div class="card" style="width: 18rem;">
+                            <div class="card-body bg-light">
+                                <h6 class="card-subtitle mb-2 text-muted text-left">Search for the weather conditions in a city</h6>
+                                <div class="input-group mb-3">
+                                    <!-- search input area -->
+                                    <input type="text" class="form-control" placeholder="Enter a city"
+                                        aria-label="Recipient's username" aria-describedby="button-addon2">
+                                    <div class="input-group-append">
+                                        <!-- button area -->
+                                        <button class="btn btn-outline-secondary bg-primary text-white" type="button"             id="button-addon2"><i class="fas fa-search"></i></button>
+                                    </div>
+                                </div>
+
+                                    <!-- list that shows cities searched -->
+                                    <ul class="list-group text-left text-white bg-primary"></ul>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                                <!-- current weather box-->
+                                <div class="col mt-4 mr-5">
+                                    <div class="card pb-2 pt-1 bg-primary text-white">
+                                        <h5 class="card-title mt-2 text-center">Forecast Now</h5>
+                                    </div>
+                                </div>
+
+
+                                <!--5 day forecast-->
+                                <div class="row">
+                                    <div class="col mt-4">
+                                        <div class="card pb-5 pl-5 bg-primary text-white">
+                                        <h5 class="card-title mt-2 mr-5 text-center">5-Day Forecast </h5>
+                                        <div class="row">
+                                            <div class="col"> </div>
+                                        </div>
+
+                                        </div>
+                                    </div>
+                                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- js link here-->
+    <script src="./Assets/script.js"></script>
+
 </body>
+
 </html>
