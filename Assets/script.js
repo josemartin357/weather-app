@@ -1,29 +1,58 @@
 // Variables
 var button = document.querySelector('.searchButton')
 var inputValue = document.querySelector('.searchInput')
-var name = document.querySelector('.name')
-var desc = document.querySelector('.desc')
-var temp = document.querySelector('.temp')
+
+var cityValue = document.querySelector('.city')
+var tempValue = document.querySelector('.temp')
+var humidValue = document.querySelector('.humidity')
+var descValue = document.querySelector('.desc')
+var windValue = document.querySelector('.wind')
+var uvIndexValue = document.querySelector('.uvIndex')
 
 
-// testing fetching
+// event listener
 button.addEventListener('click', function() {
-    fetch('https://api.openweathermap.org/data/2.5/weather?q='+inputValue.value+'&appid=264c2c2a11ab2c52afc3fad17ab64fe1')
+    // fetching for current conditions box
+    fetch('https://api.openweathermap.org/data/2.5/weather?q='+inputValue.value+'&appid=264c2c2a11ab2c52afc3fad17ab64fe1'+"&units=imperial")
     .then(response => response.json())
-    .then(data => {
-        var nameValue = data['name'];
-        var tempValue = data['main']['temp']
-        var descValue = data['weather'][0]['description'];
 
-        name.innerHTML = nameValue;
-        temp.innerHTML = tempValue;
-        desc.innerHTML = descValue;
-    console.log(data)
+    .then(response => {
+        var city = response['name'];
+        var temp = response['main']['temp']
+        var humid = response['main']['humidity']
+        var desc = response['weather'][0]['description'];
+        var wind = response['wind']['speed']
+        // var uv = response.current.uvi
+
+
+        cityValue.innerHTML = "City: "+city;
+        tempValue.innerHTML = "Temperature: "+temp;
+        humidValue.innerHTML = "Humidity: "+humid;
+        descValue.innerHTML = "Conditions: "+desc;
+        windValue.innerHTML = "Wind Speed: "+wind;
+        // uvIndexValue.innerHTML = "UV Index: "+uv;
+
+    console.log(response)
     })
 
-    
+    //  // fetching for 5-day forecast box
+    //  fetch('https://api.openweathermap.org/data/2.5/forecast?q='+inputValue.value+'&appid=264c2c2a11ab2c52afc3fad17ab64fe1'+"&units=imperial")
+    //  .then(response => response.json())
+ 
+    //  .then(response => {
+    //      var city = response['name'];
+    //      var temp = response['main']['temp']
+    //      var desc = response['weather'][0]['description'];
+ 
+    //      cityValue.innerHTML = "City: "+city;
+    //      tempValue.innerHTML = "Temperature: "+temp;
+    //      descValue.innerHTML = "Conditions: "+desc;
+    //  console.log(response)
+    //  })
 
-.catch(err => alert("Wrong city name"))
+
+
+// .catch(err => alert("Wrong city name"))
 })
 
 // Your Task
