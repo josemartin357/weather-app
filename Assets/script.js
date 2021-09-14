@@ -1,3 +1,33 @@
+// Variables
+var button = document.querySelector('.searchButton')
+var inputValue = document.querySelector('.searchInput')
+var name = document.querySelector('.name')
+var desc = document.querySelector('.desc')
+var temp = document.querySelector('.temp')
+
+
+// testing fetching
+button.addEventListener('click', function() {
+    fetch('https://api.openweathermap.org/data/2.5/weather?q='+inputValue.value+'&appid=264c2c2a11ab2c52afc3fad17ab64fe1')
+    .then(response => response.json())
+    .then(data => {
+        var nameValue = data['name'];
+        var tempValue = data['main']['temp']
+        var descValue = data['weather'][0]['description'];
+
+        name.innerHTML = nameValue;
+        temp.innerHTML = tempValue;
+        desc.innerHTML = descValue;
+    console.log(data)
+    })
+
+    
+
+.catch(err => alert("Wrong city name"))
+})
+
+
+
 // Your Task
 // Third-party APIs allow developers to access their data and functionality by making requests with specific parameters to a URL. Developers are often tasked with retrieving data from another application's API and using it in the context of their own. Your challenge is to build a weather dashboard that will run in the browser and feature dynamically updated HTML and CSS.
 // Use the OpenWeather One Call API to retrieve weather data for cities. Read through the documentation for setup and usage instructions. You will use localStorage to store any persistent data. For more information on how to work with the OpenWeather API, refer to the Full-Stack Blog on how to use API keys.
