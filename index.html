@@ -68,26 +68,61 @@
                     <!-- established class -->
                     <div class="card currentCard pb-2 pt-1 bg-primary text-white">
                         <h5 class="card-title mt-2 text-center">Forecast Now</h5>
-                        <!-- temp for tests -->
-                        <p class="name"></p>
-                        <p class="desc"></p>
-                        <p class="temp"></p>
+                        <!-- classes for data inside box -->
+                        <p><span class="city"></span> </p>
+                        <p><span class="desc"></span></p> 
+                        <p><span class="temp"></span></p>
+                        <p><span class="humidity"></span></p>    
+                        <p><span class="wind"></span></p>
+                        <p><span class="uvIndex"></span> </p>
+
                     </div>
                 </div>
                 <!--5 day forecast-->
                 <div class="row">
-                    <div class="col mt-4">
-                        <!-- established class -->
-                        <div class="card pb-5 pl-5 bg-primary text-white fiveDayCard">
+                    <div class="col-12">
+                        <!--established class -->
                             <h5 class="card-title mt-2 mr-5 text-center">5-Day Forecast </h5>
-                            <div class="row">
+                            <div class="col fiveDay">
                                 <!-- established class -->
-                                <div class="col fiveDayOne">
+                                <div class="row">
+                                    <div class="col-sm-2 bg-primary text-white ml-2 mb-3 p-2 mt-2 rounded" >
+                                        <p id="day-1"></p>
+                                        <p id="desc-1"></p> 
+                                        <p id="temp-1"></p> 
+                                        <p id="wind-1"></p> 
+                                        <p id="humidity-1"></p> 
+                                    </div>
+                                    <div class="col-sm-2 bg-primary text-white ml-2 mb-3 p-2 mt-2 rounded" >
+                                        <p id="day-2"></p>
+                                        <p id="desc-2"></p> 
+                                        <p id="temp-2"></p> 
+                                        <p id="wind-2"></p> 
+                                        <p id="humidity-2"></p> 
+                                    </div>
+                                    <div class="col-sm-2 bg-primary text-white ml-2 mb-3 p-2 mt-2 rounded" >
+                                        <p id="day-3"></p>
+                                        <p id="desc-3"></p> 
+                                        <p id="temp-3"></p> 
+                                        <p id="wind-3"></p> 
+                                        <p id="humidity-3"></p>  
+                                    </div>
+                                    <div class="col-sm-2 bg-primary text-white ml-2 mb-3 p-2 mt-2 rounded" >
+                                        <p id="day-4"></p>
+                                        <p id="desc-4"></p> 
+                                        <p id="temp-4"></p> 
+                                        <p id="wind-4"></p> 
+                                        <p id="humidity-4"></p>  
+                                    </div>
+                                    <div class="col-sm-2 bg-primary text-white ml-2 mb-3 p-2 mt-2 rounded" >
+                                        <p id="day-5"></p>
+                                        <p id="desc-5"></p> 
+                                        <p id="temp-5"></p> 
+                                        <p id="wind-5"></p> 
+                                        <p id="humidity-5"></p>  
+                                    </div>
                                 </div>
-
                             </div>
-
-                        </div>
                     </div>
                 </div>
             </div>
@@ -97,7 +132,7 @@
     <script src="./Assets/script.js"></script>
     <!-- jquery-->
     <script src="https://code.jquery.com/jquery-3.4.1.min.js"></script>
-
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.24.0/moment.min.js"></script>
 </body>
 
 </html>
