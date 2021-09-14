@@ -17,58 +17,66 @@ button.addEventListener('click', function() {
     .then(response => response.json())
 
     .then(response => {
-        var city = response['name'];
-        var temp = response['main']['temp']
-        var humid = response['main']['humidity']
-        var desc = response['weather'][0]['description'];
-        var wind = response['wind']['speed']
-        // var uv = response.current.uvi
+        var city = response.name;
+        var temp = response.main.temp;
+        var humid = response.main.humidity;
+        var wind = response.wind.speed;
+        var date = moment.unix(response.dt).format("MM/DD/YYYY")
 
+        cityValue.innerHTML = city + date;
+        tempValue.innerHTML = "Temperature: "+temp+"°F";
+        humidValue.innerHTML = "Humidity: "+humid+" %";
+        windValue.innerHTML = "Wind Speed: "+wind+" MPH";
+        getUvi(response.coord.lat, response.coord.lon)
 
-        cityValue.innerHTML = "City: "+city;
-        tempValue.innerHTML = "Temperature: "+temp;
-        humidValue.innerHTML = "Humidity: "+humid;
-        descValue.innerHTML = "Conditions: "+desc;
-        windValue.innerHTML = "Wind Speed: "+wind;
-        // uvIndexValue.innerHTML = "UV Index: "+uv;
-
-    console.log(response)
+        //icon property.
+        var weathericon= response.weather[0].icon;
+        var iconurl="https://openweathermap.org/img/wn/"+weathericon +"@2x.png";
+        $(descValue).html("<img src="+iconurl+">");
     })
-
-    //  // fetching for 5-day forecast box
-    //  fetch('https://api.openweathermap.org/data/2.5/forecast?q='+inputValue.value+'&appid=264c2c2a11ab2c52afc3fad17ab64fe1'+"&units=imperial")
-    //  .then(response => response.json())
- 
-    //  .then(response => {
-    //      var city = response['name'];
-    //      var temp = response['main']['temp']
-    //      var desc = response['weather'][0]['description'];
- 
-    //      cityValue.innerHTML = "City: "+city;
-    //      tempValue.innerHTML = "Temperature: "+temp;
-    //      descValue.innerHTML = "Conditions: "+desc;
-    //  console.log(response)
-    //  })
-
-
-
-// .catch(err => alert("Wrong city name"))
 })
 
-// Your Task
-// Third-party APIs allow developers to access their data and functionality by making requests with specific parameters to a URL. Developers are often tasked with retrieving data from another application's API and using it in the context of their own. Your challenge is to build a weather dashboard that will run in the browser and feature dynamically updated HTML and CSS.
-// Use the OpenWeather One Call API to retrieve weather data for cities. Read through the documentation for setup and usage instructions. You will use localStorage to store any persistent data. For more information on how to work with the OpenWeather API, refer to the Full-Stack Blog on how to use API keys.
+function getUvi(lat, long){
+    var getUviUrl = "https://api.openweathermap.org/data/2.5/onecall?lat="+lat+"&lon="+long +"&exclude=minutely,hourly,alerts&appid=264c2c2a11ab2c52afc3fad17ab64fe1"+"&units=imperial"
+    fetch(getUviUrl)
+    .then(response => response.json())
 
-// AS A traveler ...I WANT to see the weather outlook for multiple citie SO THAT I can plan a trip accordingly
+    .then(response => {
+    // console.log(response)
+    uvIndexValue.innerHTML = "UVI Index: "+response.current.uvi;
 
-// ACCEPTANCE: GIVEN a weather dashboard with form inputs
-// WHEN I search for a city
-// THEN I am presented with current and future conditions for that city and that city is added to the search history
-// WHEN I view current weather conditions for that city
-// THEN I am presented with the city name, the date, an icon representation of weather conditions, the temperature, the humidity, the wind speed, and the UV index
-// WHEN I view the UV index
-// THEN I am presented with a color that indicates whether the conditions are favorable, moderate, or severe
-// WHEN I view future weather conditions for that city
-// THEN I am presented with a 5-day forecast that displays the date, an icon representation of weather conditions, the temperature, the wind speed, and the humidity
-// WHEN I click on a city in the search history
-// THEN I am again presented with current and future conditions for that city
+    // console.log(response.daily)
+    Fivedayforecast(response.daily)
+
+    })
+}
+
+function Fivedayforecast(fiveDay){
+    // console.log(fiveDay)
+     var getFiveUrl = 'https://api.openweathermap.org/data/2.5/forecast?q='+inputValue.value+'&appid=264c2c2a11ab2c52afc3fad17ab64fe1'+"&units=imperial"
+    $.ajax({
+        url:getFiveUrl,
+        method:"GET"
+    }).then(function(response){
+
+    for (let i=1; i < 6; i++) {
+        console.log("this is day",fiveDay[i])
+        var day = moment.unix(fiveDay[i].dt).format("MM/DD/YYYY")
+        var temp = response.list[i+1].main.temp;
+        var wind = response.list[i+1].wind.speed;
+        var humidity = response.list[i+1].main.humidity;
+        // /icon property.
+        var weathericon= response.list[i+1].weather[0].icon;
+        var iconurl="https://openweathermap.org/img/wn/"+weathericon +"@2x.png";
+        
+   
+
+        $("#day-"+i).html(day);
+        $("#desc-"+i).html("<img src="+iconurl+">");
+        $("#temp-"+i).html(temp+"°F");
+        $("#wind-"+i).html(wind+" MPH");
+        $("#humidity-"+i).html(humidity+" %");
+    
+    }
+    })
+}
